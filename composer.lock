@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f4e9f37d3edc60c17c30a2af76fd56ce",
+    "content-hash": "9f8d6febd26905a72846a19f4840c37a",
     "packages": [
         {
             "name": "firebase/php-jwt",
-            "version": "dev-main",
+            "version": "v6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "f7886d510050fda6d976afe3aba77e8d082f42d0"
+                "reference": "018dfc4e1da92ad8a1b90adc4893f476a3b41cb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/f7886d510050fda6d976afe3aba77e8d082f42d0",
-                "reference": "f7886d510050fda6d976afe3aba77e8d082f42d0",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/018dfc4e1da92ad8a1b90adc4893f476a3b41cb8",
+                "reference": "018dfc4e1da92ad8a1b90adc4893f476a3b41cb8",
                 "shasum": ""
             },
             "require": {
@@ -34,7 +34,6 @@
             "suggest": {
                 "paragonie/sodium_compat": "Support EdDSA (Ed25519) signatures when libsodium is not present"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -65,9 +64,9 @@
             ],
             "support": {
                 "issues": "https://github.com/firebase/php-jwt/issues",
-                "source": "https://github.com/firebase/php-jwt/tree/main"
+                "source": "https://github.com/firebase/php-jwt/tree/v6.3.0"
             },
-            "time": "2022-10-05T19:51:08+00:00"
+            "time": "2022-07-15T16:48:45+00:00"
         },
         {
             "name": "psr/container",
@@ -1523,36 +1522,36 @@
         },
         {
             "name": "symfony/security-bundle",
-            "version": "6.2.x-dev",
+            "version": "v6.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-bundle.git",
-                "reference": "98d03496f36422060f7de687cd1679a94ab2ead8"
+                "reference": "acb019ca678cf1d7a47c17f017fd3b3b9791ab58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/98d03496f36422060f7de687cd1679a94ab2ead8",
-                "reference": "98d03496f36422060f7de687cd1679a94ab2ead8",
+                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/acb019ca678cf1d7a47c17f017fd3b3b9791ab58",
+                "reference": "acb019ca678cf1d7a47c17f017fd3b3b9791ab58",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": ">=2.1",
                 "ext-xml": "*",
-                "php": ">=8.1",
-                "symfony/config": "^6.1",
-                "symfony/dependency-injection": "^6.2",
+                "php": ">=8.0.2",
+                "symfony/config": "^5.4|^6.0",
+                "symfony/dependency-injection": "^5.4|^6.0",
                 "symfony/event-dispatcher": "^5.4|^6.0",
-                "symfony/http-foundation": "^6.2",
-                "symfony/http-kernel": "^6.2",
+                "symfony/http-foundation": "^5.4|^6.0",
+                "symfony/http-kernel": "^5.4|^6.0",
                 "symfony/password-hasher": "^5.4|^6.0",
-                "symfony/security-core": "^6.2",
+                "symfony/security-core": "^5.4|^6.0",
                 "symfony/security-csrf": "^5.4|^6.0",
-                "symfony/security-http": "^6.2"
+                "symfony/security-http": "^5.4|^6.0"
             },
             "conflict": {
                 "symfony/browser-kit": "<5.4",
                 "symfony/console": "<5.4",
-                "symfony/framework-bundle": "<6.2",
+                "symfony/framework-bundle": "<5.4",
                 "symfony/ldap": "<5.4",
                 "symfony/twig-bundle": "<5.4"
             },
@@ -1565,7 +1564,7 @@
                 "symfony/dom-crawler": "^5.4|^6.0",
                 "symfony/expression-language": "^5.4|^6.0",
                 "symfony/form": "^5.4|^6.0",
-                "symfony/framework-bundle": "^6.2",
+                "symfony/framework-bundle": "^5.4|^6.0",
                 "symfony/ldap": "^5.4|^6.0",
                 "symfony/process": "^5.4|^6.0",
                 "symfony/rate-limiter": "^5.4|^6.0",
@@ -1603,7 +1602,7 @@
             "description": "Provides a tight integration of the Security component into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-bundle/tree/6.2"
+                "source": "https://github.com/symfony/security-bundle/tree/v6.0.1"
             },
             "funding": [
                 {
@@ -1619,7 +1618,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-01T16:34:57+00:00"
+            "time": "2021-12-08T15:13:44+00:00"
         },
         {
             "name": "symfony/security-core",
@@ -2206,10 +2205,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "firebase/php-jwt": 20,
-        "symfony/security-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
