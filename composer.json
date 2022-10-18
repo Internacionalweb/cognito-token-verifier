@@ -1,0 +1,20 @@
+{
+    "name": "jwtcognitosignature/jwt-cognito-signature",
+    "description": "This package allow verify token from Cognito",
+    "autoload": {
+        "psr-4": {
+            "JwtCognitoSignature\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jhonatan Matías",
+            "email": "36485771+seon22break@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "firebase/php-jwt": "dev-main",
+        "symfony/security-bundle": "6.2.x-dev"
+    }
+}
