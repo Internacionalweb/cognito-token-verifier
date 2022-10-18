@@ -33,13 +33,34 @@ Este paquete permite a los usuarios validar la firma de cognito. Creando un Auth
     ```
       composer require internacionalweb/jwt-cognito-signature
     ```
+3. Configurar las variables de entorno necesarias. `.env`
+    ```
+        #######
+        REQUERIDOS
+        #######
+
+        # Si esta en dev salta la validación de firma. 
+        APP_ENV = dev|prod  
+        
+        # Los clientes permitidos , separados por comas. 
+        AWS_CLIENTS_ID_ALLOWNED = XXXXXX 
+
+        AWS_COGNITO_REGION = XXX
+        AWS_COGNITO_USER_POOL_ID = XXX
+        
+    ```
+    ```
+        #######
+        OPCIONALES
+        #######
+        
+        # Agrega el scope de las rutas
+        AWS_SCOPE_URL = http://test.com 
+    ```
+
 3. Configurar el Custom-Authenticator en Symfony
 
 <p align="right">(<a href="#readme-top">Ir arriba</a>)</p>
-
-## Información adicional
-En este apartado se puede agregar un usuario de pruebas u otra información que sea necesaria para probar la aplicación. 
-
 
 
 [PHP]: https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white

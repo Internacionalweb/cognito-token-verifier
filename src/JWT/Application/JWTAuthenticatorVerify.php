@@ -42,7 +42,7 @@ final class JWTAuthenticatorVerify
 
         $this->ensureTokenHaveRequiredParameters();
 
-        if (getenv('APP_ENV') === 'prod') {
+        if ($_ENV('APP_ENV') === 'prod') {
             $this->ensureSignature();
             $this->ensureClientId();
             $this->ensureIssuer();
