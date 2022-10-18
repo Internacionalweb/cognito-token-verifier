@@ -37,10 +37,6 @@ Este paquete permite a los usuarios validar la firma de cognito. Creando un Auth
 
 <p align="right">(<a href="#readme-top">Ir arriba</a>)</p>
 
-## Información adicional
-En este apartado se puede agregar un usuario de pruebas u otra información que sea necesaria para probar la aplicación. 
-
-
 
 [PHP]: https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white
 
