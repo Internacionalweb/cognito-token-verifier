@@ -15,6 +15,6 @@
     "minimum-stability": "dev",
     "require": {
         "firebase/php-jwt": "^6.3",
-        "symfony/security-bundle": "6.0.*"
+        "symfony/security-bundle": "6.0.1"
     }
 }
