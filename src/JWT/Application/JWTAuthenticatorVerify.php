@@ -6,9 +6,9 @@ namespace JwtCognitoSignature\JWT\Application;
 
 use InvalidArgumentException;
 use JwtCognitoSignature\JWT\Domain\Token;
-use JwtCognitoSignature\JWT\Domain\JWKRepository;
 use JwtCognitoSignature\JWT\Infrastructure\JWTParser;
 use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidSignature;
+use JwtCognitoSignature\JWT\Infrastructure\InMemoryJWKRepository;
 use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidUseException;
 use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidTokenException;
 use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidClientException;
@@ -20,7 +20,7 @@ final class JWTAuthenticatorVerify
 {
     private Token $token;
 
-    public function __construct(private JWKRepository $repository)
+    public function __construct(private InMemoryJWKRepository $repository)
     {
     }
 

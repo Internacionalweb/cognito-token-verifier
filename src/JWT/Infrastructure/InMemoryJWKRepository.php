@@ -8,23 +8,29 @@ use JwtCognitoSignature\JWT\Domain\JWKRepository;
 
 final class InMemoryJWKRepository implements JWKRepository
 {
-    private string $keys;
-
-    public function __construct()
+    public function findKeyWithKid(string $kid): ?Key
     {
-        $this->keys = file_get_contents(__DIR__ . '/jwks.json');
-    }
+        $keysFile = $_ENV['AWS_COGNITO_KEYS_FILE'];
 
-    public function findKeyWithKid(string $kid) : ?Key
-    {
-        $keys = json_decode($this->keys, true)['keys'];
-
-        foreach ($keys as $key) {
-            if ($kid === $key['kid']) {
-                $jwk = new JWK();
-                return $jwk->parseKey($key);
-            }
+        if (empty($keysFile)) {
+            return null;
         }
-        return null;
+
+        try {
+
+            $content = file_get_contents($keysFile);
+            $keys = json_decode($content, true)['keys'];
+
+            foreach ($keys as $key) {
+                if ($kid === $key['kid']) {
+                    $jwk = new JWK();
+                    return $jwk->parseKey($key);
+                }
+            }
+            return null;
+
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 }

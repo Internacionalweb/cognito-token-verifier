@@ -47,6 +47,9 @@ Este paquete permite a los usuarios validar la firma de cognito. Creando un Auth
 
         AWS_COGNITO_REGION = XXX
         AWS_COGNITO_USER_POOL_ID = XXX
+
+        # Cognito file with keys
+        AWS_COGNITO_KEYS_FILE = xxxxxxx/xxxx/xxx
         
     ```
     ```
