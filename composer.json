@@ -1,5 +1,5 @@
 {
-    "name": "jwtcognitosignature/jwt-cognito-signature",
+    "name": "internacionalweb/jwt-cognito-signature",
     "description": "This package allow verify token from Cognito",
     "autoload": {
         "psr-4": {
