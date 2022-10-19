@@ -1,7 +1,7 @@
 {
     "name": "barymont/jwt-cognito-signature",
     "description": "This package allow verify token from Cognito",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "autoload": {
         "psr-4": {
             "JwtCognitoSignature\\": "src/"
