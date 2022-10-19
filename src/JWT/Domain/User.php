@@ -18,6 +18,9 @@ final class User implements UserInterface
         return $this->userId;
     }
 
+    /**
+     * @return array<mixed,mixed>
+     */
     public function getRoles(): array
     {
         return [];

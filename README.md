@@ -31,7 +31,7 @@ Este paquete permite a los usuarios validar la firma de cognito. Creando un Auth
     ```
 2. Instalar la librería
     ```
-      composer require internacionalweb/jwt-cognito-signature
+      composer require barymont/jwt-cognito-signature
     ```
 3. Configurar las variables de entorno necesarias. `.env`
     ```
