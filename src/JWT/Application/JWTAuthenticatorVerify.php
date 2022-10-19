@@ -15,13 +15,16 @@ use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidClientException;
 use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidScopesException;
 use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidUserPoolException;
 use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidTokenExpiredException;
+use JwtCognitoSignature\JWT\Domain\JWKRepository;
 
 final class JWTAuthenticatorVerify
 {
     private Token $token;
+    private JWKRepository $repository;
 
-    public function __construct(private InMemoryJWKRepository $repository)
+    public function __construct()
     {
+        $this->repository = new InMemoryJWKRepository();
     }
 
     /**
@@ -42,7 +45,7 @@ final class JWTAuthenticatorVerify
 
         $this->ensureTokenHaveRequiredParameters();
 
-        if ($_ENV('APP_ENV') === 'prod') {
+        if ($_ENV['APP_ENV'] === 'prod') {
             $this->ensureSignature();
             $this->ensureClientId();
             $this->ensureIssuer();
