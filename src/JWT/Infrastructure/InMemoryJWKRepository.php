@@ -18,9 +18,13 @@ final class InMemoryJWKRepository implements JWKRepository
 
         try {
 
-            $content = file_get_contents($keysFile);
-            $keys = json_decode($content, true)['keys'];
+            if(!is_file($keysFile) && strpos("http",$keysFile)){
+                return null;
+            }
 
+            $content = file_get_contents(is_file($keysFile) ? realpath($keysFile) : $keysFile);
+            $keys = json_decode($content, true)['keys'];
+                
             foreach ($keys as $key) {
                 if ($kid === $key['kid']) {
                     $jwk = new JWK();
