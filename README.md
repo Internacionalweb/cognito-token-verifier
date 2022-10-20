@@ -13,7 +13,7 @@
 </div>
 
 ## Sobre el Proyecto
-Este paquete permite a los usuarios validar la firma de cognito. Creando un Authenticator en Symfony el proceso de validación de los tokens recae en esta librería.
+Cognito permite autenticar usuarios, ese acceso se consigue mediante unas credencials bien sean de ClientID y Secret o bien mediante usuario y contraseña. Cuando este proceso termina, tenemos acceso aun Json Web Token. Éste contiene la información principal para verificar que el usuario ha accedido a nuestra aplicación. Esta librería cumple la función de verificar que ésta firma proviene de una aplicación deseada.
 
 <p align="right">(<a href="#readme-top">Ir arriba</a>)</p>
 
@@ -61,11 +61,15 @@ Este paquete permite a los usuarios validar la firma de cognito. Creando un Auth
         AWS_SCOPE_URL = http://test.com 
     ```
 
-3. Instalar el bundle Security
+### Ejemplo de implementación en Symfony
+
+1. Instalar la dependencia y configurar las variables de entorno (anteriores pasos).
+
+2. Instalar el bundle Security
     ```
     composer require symfony/security-bundle
     ```
-4. Configura el Custom Authenticator. 
+3. Configura el Custom Authenticator. 
     ```PHP
     // Ejemplo de un authenticator
     final class CognitoAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface
@@ -136,9 +140,10 @@ Este paquete permite a los usuarios validar la firma de cognito. Creando un Auth
     }
     ```  
 
-
-5. Ready!
-
+4. Habilitar el servicio de autowiring la aplicación. 
+  ```XML
+      <service id="JwtCognitoSignature\JWT\Application\JWTAuthenticatorVerify" autowire="true"/>
+  ```
 
 <p align="right">(<a href="#readme-top">Ir arriba</a>)</p>
 
