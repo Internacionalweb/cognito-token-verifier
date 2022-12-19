@@ -97,8 +97,6 @@ Cognito permite autenticar usuarios, ese acceso se consigue mediante unas creden
             // Extract token from header
             $token = $this->getBearerHeader($request);
 
-             $token = $this->getBearerHeader($request);
-
             try {
                 
                 $this->jwtAuthenticatorVerify->__invoke($token, $request->attributes->get('required_scopes'));
