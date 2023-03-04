@@ -6,7 +6,7 @@
 <br />
 
 <div align="center">
-    <h3 align="center">Cognito JWT Validator for PHP</h3>
+    <h3 align="center">Cognito Token Verifier for PHP</h3>
 </div>
 
 ## About the Project
