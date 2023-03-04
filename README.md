@@ -31,3 +31,7 @@ This library verifies that the signature of the JWT is valid, comes from a desir
 ### Usage examples:
 
 - [Symfony Custom Authenticator](../documents/symfony-custom-authenticator.md)
+
+
+### Contributors:
+
