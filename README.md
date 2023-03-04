@@ -22,7 +22,7 @@ This library verifies that the signature of the JWT is valid, comes from a desir
 
 1. Install the library in your project using composer
     ```
-      composer require barymont/jwt-cognito-signature
+      composer require internacionalweb/cognito-token-verifier
     ```
 2. Set up the necessary environment variables, check the [.env.example](../.env.example) file for more information.
 
