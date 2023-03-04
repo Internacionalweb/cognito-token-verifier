@@ -1,14 +1,22 @@
 <?php
 
-namespace JwtCognitoSignature\JWT\Domain;
+declare(strict_types=1);
+
+namespace JwtCognitoSignature\Domain;
 
 final class Token
 {
     /**
      * @param array<int,string> $scope
      */
-    public function __construct(private string $kid, private string $iss, private string $tokenUse, private string $clientId, private array $scope, private int $exp)
-    {
+    public function __construct(
+        private string $kid,
+        private string $iss,
+        private string $tokenUse,
+        private string $clientId,
+        private array $scope,
+        private int $exp,
+    ) {
     }
 
     public function kid(): string
