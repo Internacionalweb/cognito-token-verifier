@@ -1,14 +1,18 @@
 
 <a name="readme-top"></a>
-![PHP][PHP]
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
 
 <br />
+
 <div align="center">
-    <h3 align="center">JWT Cognito Signature Validator for PHP</h3>
+    <h3 align="center">Cognito JWT Validator for PHP</h3>
 </div>
 
 ## About the Project
-Cognito is a service provided by Amazon Web Services (AWS) that allows users to authenticate and access AWS resources through credentials such as ClientID and Secret, or username and password. After a user successfully authenticates, Cognito returns a JSON Web Token (JWT), which contains the main information required to verify that the user has accessed our application. This library verifies that the signature of the JWT comes from a desired application.
+Cognito is a service provided by Amazon Web Services (AWS) that allows users to authenticate and access AWS resources through credentials such as ClientID and Secret, or username and password. After a user successfully authenticates, Cognito returns a JSON Web Token (JWT), which contains the main information required to verify that the user has accessed our application.
+
+This library verifies that the signature of the JWT is valid, comes from a desired application, and that the token has not been tampered with or expired.
 
 ## Getting Started
 
@@ -27,6 +31,3 @@ Cognito is a service provided by Amazon Web Services (AWS) that allows users to 
 ### Usage examples:
 
 - [Symfony Custom Authenticator](../documents/symfony-custom-authenticator.md)
-
-[PHP]: https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white
-
