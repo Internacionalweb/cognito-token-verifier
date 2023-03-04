@@ -2,29 +2,26 @@
 
 declare(strict_types=1);
 
-namespace JwtCognitoSignature\JWT\Application;
+namespace JwtCognitoSignature\Application;
 
 use InvalidArgumentException;
-use JwtCognitoSignature\JWT\Domain\Token;
-use JwtCognitoSignature\JWT\Infrastructure\JWTParser;
-use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidSignature;
-use JwtCognitoSignature\JWT\Infrastructure\InMemoryJWKRepository;
-use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidUseException;
-use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidTokenException;
-use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidClientException;
-use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidScopesException;
-use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidUserPoolException;
-use JwtCognitoSignature\JWT\Domain\Exceptions\InvalidTokenExpiredException;
-use JwtCognitoSignature\JWT\Domain\JWKRepository;
+use JwtCognitoSignature\Domain\Token;
+use JwtCognitoSignature\Domain\KeysRepository;
+use JwtCognitoSignature\Infrastructure\BearerTokenParser;
+use JwtCognitoSignature\Domain\Exceptions\InvalidSignature;
+use JwtCognitoSignature\Domain\Exceptions\InvalidUseException;
+use JwtCognitoSignature\Domain\Exceptions\InvalidTokenException;
+use JwtCognitoSignature\Domain\Exceptions\InvalidClientException;
+use JwtCognitoSignature\Domain\Exceptions\InvalidScopesException;
+use JwtCognitoSignature\Domain\Exceptions\InvalidUserPoolException;
+use JwtCognitoSignature\Domain\Exceptions\InvalidTokenExpiredException;
 
-final class JWTAuthenticatorVerify
+final class Verifier
 {
     private Token $token;
-    private JWKRepository $repository;
 
-    public function __construct()
+    public function __construct(private KeysRepository $keysRepository)
     {
-        $this->repository = new InMemoryJWKRepository();
     }
 
     /**
@@ -41,7 +38,7 @@ final class JWTAuthenticatorVerify
      */
     public function __invoke(string $bearerToken, ?array $scopesRoutes): void
     {
-        $this->token = JWTParser::decode($bearerToken);
+        $this->token = BearerTokenParser::decode($bearerToken);
 
         $this->ensureTokenHaveRequiredParameters();
 
@@ -62,7 +59,7 @@ final class JWTAuthenticatorVerify
 
     private function ensureSignature(): void
     {
-        $jwk = $this->repository->findKeyWithKid($this->token->kid());
+        $jwk = $this->keysRepository->findKeyWithKid($this->token->kid());
 
         if (null === $jwk) {
             throw new InvalidSignature();
