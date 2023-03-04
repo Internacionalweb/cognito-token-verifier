@@ -1,6 +1,8 @@
 <?php
 
-namespace JwtCognitoSignature\JWT\Domain\Exceptions;
+declare(strict_types=1);
+
+namespace JwtCognitoSignature\Domain\Exceptions;
 
 use Exception;
 

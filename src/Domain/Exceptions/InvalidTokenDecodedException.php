@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace JwtCognitoSignature\JWT\Domain\Exceptions;
+namespace JwtCognitoSignature\Domain\Exceptions;
 
 use Exception;
 
