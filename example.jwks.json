@@ -1,0 +1,20 @@
+{
+    "keys": [
+        {
+            "kid": "1234example=",
+            "alg": "RS256",
+            "kty": "RSA",
+            "e": "AQAB",
+            "n": "1234567890",
+            "use": "sig"
+        },
+        {
+            "kid": "5678example=",
+            "alg": "RS256",
+            "kty": "RSA",
+            "e": "AQAB",
+            "n": "987654321",
+            "use": "sig"
+        }
+    ]
+}
