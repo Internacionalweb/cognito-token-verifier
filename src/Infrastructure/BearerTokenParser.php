@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace JwtCognitoSignature\JWT\Infrastructure;
+namespace JwtCognitoSignature\Infrastructure;
 
 use Firebase\JWT\JWT;
-use JwtCognitoSignature\JWT\Domain\Token;
+use JwtCognitoSignature\Domain\Token;
 
-final class JWTParser
+final class BearerTokenParser
 {
     public static function decode(string $bearerToken): Token
     {
