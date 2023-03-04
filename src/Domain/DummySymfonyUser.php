@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace JwtCognitoSignature\Domain;
+namespace CognitoTokenVerifier\Domain;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace JwtCognitoSignature\Infrastructure;
+namespace CognitoTokenVerifier\Infrastructure;
 
 use Firebase\JWT\JWK;
 use Firebase\JWT\Key;
-use JwtCognitoSignature\Domain\KeysRepository;
+use CognitoTokenVerifier\Domain\KeysRepository;
 
 final class FromFileKeysRepository implements KeysRepository
 {

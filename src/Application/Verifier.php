@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace JwtCognitoSignature\Application;
+namespace CognitoTokenVerifier\Application;
 
 use InvalidArgumentException;
-use JwtCognitoSignature\Domain\Token;
-use JwtCognitoSignature\Domain\KeysRepository;
-use JwtCognitoSignature\Infrastructure\BearerTokenParser;
-use JwtCognitoSignature\Domain\Exceptions\InvalidSignature;
-use JwtCognitoSignature\Domain\Exceptions\InvalidUseException;
-use JwtCognitoSignature\Domain\Exceptions\InvalidTokenException;
-use JwtCognitoSignature\Domain\Exceptions\InvalidClientException;
-use JwtCognitoSignature\Domain\Exceptions\InvalidScopesException;
-use JwtCognitoSignature\Domain\Exceptions\InvalidUserPoolException;
-use JwtCognitoSignature\Domain\Exceptions\InvalidTokenExpiredException;
+use CognitoTokenVerifier\Domain\Token;
+use CognitoTokenVerifier\Domain\KeysRepository;
+use CognitoTokenVerifier\Infrastructure\BearerTokenParser;
+use CognitoTokenVerifier\Domain\Exceptions\InvalidSignature;
+use CognitoTokenVerifier\Domain\Exceptions\InvalidUseException;
+use CognitoTokenVerifier\Domain\Exceptions\InvalidTokenException;
+use CognitoTokenVerifier\Domain\Exceptions\InvalidClientException;
+use CognitoTokenVerifier\Domain\Exceptions\InvalidScopesException;
+use CognitoTokenVerifier\Domain\Exceptions\InvalidUserPoolException;
+use CognitoTokenVerifier\Domain\Exceptions\InvalidTokenExpiredException;
 
 final class Verifier
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace JwtCognitoSignature\Tests\Application;
+namespace CognitoTokenVerifier\Tests\Application;
 
 use DG\BypassFinals;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use JwtCognitoSignature\Application\Verifier;
+use CognitoTokenVerifier\Application\Verifier;
 
 final class VerifierTest extends TestCase
 {

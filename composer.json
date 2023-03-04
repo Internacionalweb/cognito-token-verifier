@@ -4,12 +4,12 @@
     "version": "1.0.0",
     "autoload": {
         "psr-4": {
-            "JwtCognitoSignature\\": "src/"
+            "CognitoTokenVerifier\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "JwtCognitoSignature\\Tests\\": "tests/"
+            "CognitoTokenVerifier\\Tests\\": "tests/"
         }
     },
     "scripts": {

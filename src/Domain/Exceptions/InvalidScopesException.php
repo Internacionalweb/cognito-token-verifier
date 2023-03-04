@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace JwtCognitoSignature\Domain\Exceptions;
+namespace CognitoTokenVerifier\Domain\Exceptions;
 
 use Exception;
 

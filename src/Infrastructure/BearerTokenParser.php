@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace JwtCognitoSignature\Infrastructure;
+namespace CognitoTokenVerifier\Infrastructure;
 
 use Firebase\JWT\JWT;
-use JwtCognitoSignature\Domain\Token;
+use CognitoTokenVerifier\Domain\Token;
 
 final class BearerTokenParser
 {

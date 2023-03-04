@@ -81,5 +81,5 @@
 
 4. Configute the service and enable the autowiring in the `services.xml` file:
   ```XML
-      <service id="JwtCognitoSignature\JWT\Application\Veryfier" autowire="true"/>
+      <service id="CognitoTokenVerifier\Application\Veryfier" autowire="true"/>
   ```
