@@ -2,11 +2,24 @@
 
 declare(strict_types=1);
 
-namespace JwtCognitoSignature\JWT\Domain;
+namespace JwtCognitoSignature\Domain;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class User implements UserInterface
+/**
+ * This class is used to create a Dummy Symfony User object that implements the UserInterface, 
+ * which is required by the SecurityBundle to create a custom authenticator.
+ * 
+ * If you want to use this class, you will need to install symfony/security-bundle package.
+ * 
+ * @see https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded 
+ * 
+ */
+
+/**
+ * @psalm-immutable
+ */
+final class DummySymfonyUser implements UserInterface
 {
     public function __construct(
         private string $userId
