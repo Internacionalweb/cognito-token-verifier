@@ -1,12 +1,14 @@
 <?php
 
-namespace JwtCognitoSignature\JWT\Infrastructure;
+declare(strict_types=1);
+
+namespace JwtCognitoSignature\Infrastructure;
 
 use Firebase\JWT\JWK;
 use Firebase\JWT\Key;
-use JwtCognitoSignature\JWT\Domain\JWKRepository;
+use JwtCognitoSignature\Domain\KeysRepository;
 
-final class InMemoryJWKRepository implements JWKRepository
+final class FromFileKeysRepository implements KeysRepository
 {
     public function findKeyWithKid(string $kid): ?Key
     {
