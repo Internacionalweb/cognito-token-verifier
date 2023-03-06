@@ -12,7 +12,7 @@
         "authentication"
     ],
     "homepage": "https://github.com/Internacionalweb/cognito-token-verifier",
-    "license": "MIT",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Jhonatan Matías",
