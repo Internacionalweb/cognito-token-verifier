@@ -8,13 +8,15 @@ use Exception;
 
 final class InvalidClientException extends Exception
 {
+    private const STATUS_CODE = 401;
+
     public function __construct()
     {
-        parent::__construct(sprintf('The client_id is not valid'), 401);
+        parent::__construct(sprintf('The client is not valid'), self::STATUS_CODE);
     }
 
-    public function getStatusCode() : int
+    public function getStatusCode(): int
     {
-        return 401;
+        return self::STATUS_CODE;
     }
 }

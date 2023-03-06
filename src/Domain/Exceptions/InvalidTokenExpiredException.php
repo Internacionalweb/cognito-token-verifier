@@ -8,13 +8,15 @@ use Exception;
 
 final class InvalidTokenExpiredException extends Exception
 {
+    private const STATUS_CODE = 401;
+
     public function __construct()
     {
-        parent::__construct('Token is expired', 401);
+        parent::__construct('The token is expired', self::STATUS_CODE);
     }
 
-    public function getStatusCode() : int
+    public function getStatusCode(): int
     {
-        return 401;
+        return self::STATUS_CODE;
     }
 }

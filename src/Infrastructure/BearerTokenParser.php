@@ -6,6 +6,7 @@ namespace CognitoTokenVerifier\Infrastructure;
 
 use Firebase\JWT\JWT;
 use CognitoTokenVerifier\Domain\Token;
+use CognitoTokenVerifier\Domain\Exceptions\InvalidTokenDecodedException;
 
 final class BearerTokenParser
 {
@@ -29,7 +30,7 @@ final class BearerTokenParser
                 $bodyDecoded->exp ?? 0
             );
         } catch (\Exception $e) {
-            throw new \InvalidArgumentException('The token have an incorrect format or is not valid.', 401);
+            throw new InvalidTokenDecodedException;
         }
     }
 }

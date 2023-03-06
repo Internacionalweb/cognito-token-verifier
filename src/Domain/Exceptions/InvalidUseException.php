@@ -8,13 +8,15 @@ use Exception;
 
 final class InvalidUseException extends Exception
 {
+    private const STATUS_CODE = 401;
+
     public function __construct()
     {
-        parent::__construct('The access token havent access', 401);
+        parent::__construct('The token use is not valid', self::STATUS_CODE);
     }
 
     public function getStatusCode(): int
     {
-        return 401;
+        return self::STATUS_CODE;
     }
 }
