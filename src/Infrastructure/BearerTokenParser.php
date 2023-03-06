@@ -30,7 +30,7 @@ final class BearerTokenParser
                 $bodyDecoded->exp ?? 0
             );
         } catch (\Exception $e) {
-            throw new InvalidTokenDecodedException;
+            throw new InvalidTokenDecodedException();
         }
     }
 }

@@ -19,5 +19,4 @@ final class InvalidTokenDecodedException extends Exception
     {
         return self::STATUS_CODE;
     }
-
 }

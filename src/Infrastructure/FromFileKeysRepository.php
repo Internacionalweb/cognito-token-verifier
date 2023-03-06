@@ -19,14 +19,13 @@ final class FromFileKeysRepository implements KeysRepository
         }
 
         try {
-
-            if(!is_file($keysFile) && strpos("http",$keysFile)){
+            if (!is_file($keysFile) && strpos("http", $keysFile)) {
                 return null;
             }
 
             $content = file_get_contents(is_file($keysFile) ? realpath($keysFile) : $keysFile);
             $keys = json_decode($content, true)['keys'];
-                
+
             foreach ($keys as $key) {
                 if ($kid === $key['kid']) {
                     $jwk = new JWK();
@@ -34,7 +33,6 @@ final class FromFileKeysRepository implements KeysRepository
                 }
             }
             return null;
-
         } catch (\Exception $e) {
             return null;
         }
