@@ -24,13 +24,13 @@ This library verifies that the signature of the JWT is valid, comes from a desir
     ```
       composer require internacionalweb/cognito-token-verifier
     ```
-2. Set up the necessary environment variables, check the [.env.example](../.env.example) file for more information.
+2. Set up the necessary environment variables, check the [.env.example](.env.example) file for more information.
 
 3. Configure your project to use the library, check the [Usage examples](#usage-examples) section for more information.
 
 ### Usage examples:
 
-- [Symfony Custom Authenticator](../documents/symfony-custom-authenticator.md)
+- [Symfony Custom Authenticator](documents/symfony-custom-authenticator.md)
 
 
 ### Contributors:
