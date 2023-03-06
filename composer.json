@@ -1,7 +1,37 @@
 {
     "name": "internacionalweb/cognito-token-verifier",
+    "type": "library",
     "description": "This library verifies that the signature of the JWT is valid, comes from a desired application, and that the token has not been tampered with or expired.",
-    "version": "1.0.0",
+    "keywords": [
+        "cognito",
+        "jwt",
+        "token",
+        "verifier",
+        "aws",
+        "amazon",
+        "authentication"
+    ],
+    "homepage": "https://github.com/Internacionalweb/cognito-token-verifier",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jhonatan Matías",
+            "email": "jhonatanmatiasmartin@outlook.es",
+            "role": "Developer"
+        },
+        {
+            "name": "Adrián Martín",
+            "email": "contacto@adrianmr.com",
+            "homepage": "https://adrianmr.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Diego Martín",
+            "email": "contacto@diegomarty.com",
+            "homepage": "https://diegomarty.com",
+            "role": "Developer"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "CognitoTokenVerifier\\": "src/"
@@ -13,32 +43,19 @@
         }
     },
     "scripts": {
-        "test" : [
-            "php vendor/phpunit/phpunit/phpunit --colors=always ./tests",
-            "phpstan  analyse --level=6  ./src/"
-        ]
+        "test": "php vendor/phpunit/phpunit/phpunit --colors=always ./tests",
+        "cs:checker": "php vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix ./src --rules=@PSR12 --dry-run --diff",
+        "cs:fix": "php vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix ./src --rules=@PSR12",
+        "phpstan": "php vendor/phpstan/phpstan/phpstan analyse ./src --level=6 --no-progress --no-interaction --memory-limit=2G"
     },
-    "authors": [
-        {
-            "name": "Jhonatan Matías",
-            "email": "jhonatanmatiasmartin@outlook.es"
-        },
-        {
-            "name": "Adrián Martín",
-            "email": "contacto@adrianmr.com"
-        },
-        {
-            "name": "Diego Martín",
-            "email": "contacto@diegomarty.com"
-        }
-    ],
-    "minimum-stability": "stable",
     "require": {
+        "php": ">=8.0",
         "firebase/php-jwt": "^6.3"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^10.0",
-        "dg/bypass-finals": "^1.4"
+        "dg/bypass-finals": "^1.4",
+        "friendsofphp/php-cs-fixer": "^3.14"
     }
 }
