@@ -10,7 +10,7 @@ use CognitoTokenVerifier\Domain\Exceptions\InvalidTokenDecodedException;
 
 final class BearerTokenParser
 {
-    public static function decode(string $bearerToken): Token
+    public function decode(string $bearerToken): Token
     {
         try {
             $scopes = [];

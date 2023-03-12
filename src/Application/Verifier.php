@@ -21,21 +21,22 @@ final class Verifier
     private string $cognitoUserPoolRegion;
 
     /**
-     * @param string                        $cognitoUserPoolId                  AWS Cognito User Pool Id (You can find it in the AWS Cognito User Pool console) (Example: us-east-1_XXXXXXXXX)
-     * @param KeysRepository                $keysRepository                     Keys Repository (You can use the one provided in the package 'FromFileKeysRepository' or create your own, just implement the KeysRepository interface)
-     * @param string|null                   $cognitoAppClientsIdsAllowed        AWS Cognito APPs Client Ids allowed (Separated by comma) (Optional if you dont want to validate Apps just keep it on null)
+     * @param string         $cognitoUserPoolId           AWS Cognito User Pool Id (You can find it in the AWS Cognito User Pool console) (Example: us-east-1_XXXXXXXXX)
+     * @param KeysRepository $keysRepository              Keys Repository (You can use the one provided in the package 'FromFileKeysRepository' or create your own, just implement the KeysRepository interface)
+     * @param string|null    $cognitoAppClientsIdsAllowed AWS Cognito APPs Client Ids allowed (Separated by comma) (Optional if you dont want to validate Apps just keep it on null)
      */
     public function __construct(
         private string $cognitoUserPoolId,
         private KeysRepository $keysRepository,
         private ?string $cognitoAppClientsIdsAllowed = null,
+        private BearerTokenParser $bearerTokenParser = new BearerTokenParser(),
     ) {
         $this->setCognitoUserPoolRegionFromCognitoUserPoolId();
     }
 
     /**
-     * @param  string                       $bearerToken                    Bearer Token from Cognito Auth
-     * @param  array<string>|null           $requiredScopes                 Scopes that the token must have to be valid (Optional if you dont want to validate scopes just keep it on null)
+     * @param  string                       $bearerToken    Bearer Token from Cognito Auth
+     * @param  array<string>|null           $requiredScopes Scopes that the token must have to be valid (Optional if you dont want to validate scopes just keep it on null)
      * @throws InvalidTokenException        In case the token dont have the required parameters (kid, iss, tokenUse, clientId, scope, exp)
      * @throws InvalidSignature             In case the token signature is invalid (kid not found on JWK)
      * @throws InvalidTokenExpiredException In case the token is expired
@@ -46,7 +47,7 @@ final class Verifier
      */
     public function __invoke(string $bearerToken, ?array $requiredScopes = null): void
     {
-        $this->token = BearerTokenParser::decode($bearerToken);
+        $this->token = $this->bearerTokenParser->decode($bearerToken);
 
         $this->ensureTokenHaveRequiredParameters();
         $this->ensureTokenKeyIdExistsOnJWK();
