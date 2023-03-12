@@ -45,6 +45,9 @@ final class FromFileKeysRepository implements KeysRepository
         }
     }
 
+    /**
+     * @return array<int,array<string,string>>
+     */
     private function fetchKeys(string $keysFilePath): array
     {
         if (!is_file($keysFilePath) && strpos("http", $keysFilePath)) {
