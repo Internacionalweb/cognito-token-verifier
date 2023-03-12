@@ -10,20 +10,26 @@ use CognitoTokenVerifier\Domain\KeysRepository;
 
 final class FromFileKeysRepository implements KeysRepository
 {
-    public function findKeyWithKid(string $kid): ?Key
-    {
-        $keysFile = $_ENV['AWS_COGNITO_KEYS_FILE'];
 
-        if (empty($keysFile)) {
+    # Cognito file with keys, more info: (https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) 
+    # You can download the keys for your userpool in: https://cognito-idp.{awsRegion}.amazonaws.com/{userPoolId}/.well-known/jwks.json
+    # Dont use the URL, download the file, add it to your project then set the absolute path in $keysFilePath
+    public function __construct(private string $keysFilePath)
+    {
+    }
+
+    public function findKeyByKid(string $kid): ?Key
+    {
+        if (empty($this->keysFilePath)) {
             return null;
         }
 
         try {
-            if (!is_file($keysFile) && strpos("http", $keysFile)) {
+            if (!is_file($this->keysFilePath) && strpos("http", $this->keysFilePath)) {
                 return null;
             }
 
-            $content = file_get_contents(is_file($keysFile) ? realpath($keysFile) : $keysFile);
+            $content = file_get_contents(is_file($this->keysFilePath) ? realpath($this->keysFilePath) : $this->keysFilePath);
             $keys = json_decode($content, true)['keys'];
 
             foreach ($keys as $key) {
@@ -33,7 +39,7 @@ final class FromFileKeysRepository implements KeysRepository
                 }
             }
             return null;
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return null;
         }
     }

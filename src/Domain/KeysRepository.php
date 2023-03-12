@@ -8,5 +8,5 @@ use Firebase\JWT\Key;
 
 interface KeysRepository
 {
-    public function findKeyWithKid(string $kid): ?Key;
+    public function findKeyByKid(string $kid): ?Key;
 }
