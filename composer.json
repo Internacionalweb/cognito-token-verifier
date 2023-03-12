@@ -43,9 +43,9 @@
         }
     },
     "scripts": {
-        "test": "php vendor/phpunit/phpunit/phpunit --colors=always ./tests",
-        "cs:checker": "php vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix ./src --rules=@PSR12 --dry-run --diff",
-        "cs:fix": "php vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix ./src --rules=@PSR12",
+        "tests": "php vendor/phpunit/phpunit/phpunit --colors=always ./tests",
+        "cs:checker": "php vendor/friendsofphp/php-cs-fixer/php-cs-fixerfix --config .php-cs-fixer.php --diff --dry-run ./src ./tests",
+        "cs:fix": "php vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --config .php-cs-fixer.php ./src ./tests",
         "phpstan": "php vendor/phpstan/phpstan/phpstan analyse ./src --level=6 --no-progress --no-interaction --memory-limit=2G"
     },
     "require": {
@@ -56,6 +56,8 @@
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^10.0",
         "dg/bypass-finals": "^1.4",
-        "friendsofphp/php-cs-fixer": "^3.14"
+        "friendsofphp/php-cs-fixer": "^3.14",
+        "vlucas/phpdotenv": "^5.5",
+        "symfony/var-dumper": "^6.2"
     }
 }

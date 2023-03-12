@@ -10,31 +10,51 @@ use CognitoTokenVerifier\Domain\KeysRepository;
 
 final class FromFileKeysRepository implements KeysRepository
 {
-    public function findKeyWithKid(string $kid): ?Key
+    /**
+     * @param string $keysFilePath AbsolutePath or URL to the file with the keys, if you use the URL, the file will be downloaded on every request, so is recommended to download the file and use the absolute path
+     *
+     * @see https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html (More info about the keys)
+     * @see https://cognito-idp.{awsRegion}.amazonaws.com/{userPoolId}/.well-known/jwks.json (Download the keys for your userpool, you can use this URL on development, but on production is recommended to download the file and use the absolute path)
+     */
+    public function __construct(private string $keysFilePath)
     {
-        $keysFile = $_ENV['AWS_COGNITO_KEYS_FILE'];
+    }
 
-        if (empty($keysFile)) {
+    public function findKeyByKid(string $kid): ?Key
+    {
+        if (empty($this->keysFilePath)) {
             return null;
         }
 
         try {
-            if (!is_file($keysFile) && strpos("http", $keysFile)) {
+            $keys = $this->fetchKeys($this->keysFilePath);
+
+            if (empty($keys)) {
                 return null;
             }
 
-            $content = file_get_contents(is_file($keysFile) ? realpath($keysFile) : $keysFile);
-            $keys = json_decode($content, true)['keys'];
-
             foreach ($keys as $key) {
                 if ($kid === $key['kid']) {
-                    $jwk = new JWK();
-                    return $jwk->parseKey($key);
+                    return (new JWK())->parseKey($key);
                 }
             }
+
             return null;
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return null;
         }
+    }
+
+    /**
+     * @return array<int,array<string,string>>
+     */
+    private function fetchKeys(string $keysFilePath): array
+    {
+        if (!is_file($keysFilePath) && strpos('http', $keysFilePath)) {
+            return [];
+        }
+
+        $content = file_get_contents(is_file($keysFilePath) ? realpath($keysFilePath) : $keysFilePath);
+        return json_decode($content, true)['keys'];
     }
 }
