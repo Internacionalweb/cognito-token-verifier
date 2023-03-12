@@ -6,7 +6,7 @@
 
 <div align="center">
     <h3 align="center">Cognito Token Verifier for PHP</h3>
-    <a href="https://codecov.io/github/Internacionalweb/cognito-token-verifier" > 
+    <a href="https://app.codecov.io/github/Internacionalweb/cognito-token-verifier" > 
         <img src="https://codecov.io/github/Internacionalweb/cognito-token-verifier/branch/master/graph/badge.svg?token=LBZ4VRX3HT"/> 
     </a>
 </div>
