@@ -10,10 +10,12 @@ use CognitoTokenVerifier\Domain\KeysRepository;
 
 final class FromFileKeysRepository implements KeysRepository
 {
-
-    # Cognito file with keys, more info: (https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) 
-    # You can download the keys for your userpool in: https://cognito-idp.{awsRegion}.amazonaws.com/{userPoolId}/.well-known/jwks.json
-    # Dont use the URL, download the file, add it to your project then set the absolute path in $keysFilePath
+    /**
+     * @param string $keysFilePath AbsolutePath or URL to the file with the keys, if you use the URL, the file will be downloaded on every request, so is recommended to download the file and use the absolute path
+     *
+     * @see https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html (More info about the keys)
+     * @see https://cognito-idp.{awsRegion}.amazonaws.com/{userPoolId}/.well-known/jwks.json (Download the keys for your userpool, you can use this URL on development, but on production is recommended to download the file and use the absolute path)
+     */
     public function __construct(private string $keysFilePath)
     {
     }
@@ -25,22 +27,31 @@ final class FromFileKeysRepository implements KeysRepository
         }
 
         try {
-            if (!is_file($this->keysFilePath) && strpos("http", $this->keysFilePath)) {
+            $keys = $this->fetchKeys($this->keysFilePath);
+
+            if (empty($keys)) {
                 return null;
             }
 
-            $content = file_get_contents(is_file($this->keysFilePath) ? realpath($this->keysFilePath) : $this->keysFilePath);
-            $keys = json_decode($content, true)['keys'];
-
             foreach ($keys as $key) {
                 if ($kid === $key['kid']) {
-                    $jwk = new JWK();
-                    return $jwk->parseKey($key);
+                    return (new JWK())->parseKey($key);
                 }
             }
+
             return null;
         } catch (\Exception) {
             return null;
         }
+    }
+
+    private function fetchKeys(string $keysFilePath): array
+    {
+        if (!is_file($keysFilePath) && strpos("http", $keysFilePath)) {
+            return [];
+        }
+
+        $content = file_get_contents(is_file($keysFilePath) ? realpath($keysFilePath) : $keysFilePath);
+        return json_decode($content, true)['keys'];
     }
 }
