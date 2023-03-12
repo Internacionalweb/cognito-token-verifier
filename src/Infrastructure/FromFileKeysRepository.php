@@ -50,7 +50,7 @@ final class FromFileKeysRepository implements KeysRepository
      */
     private function fetchKeys(string $keysFilePath): array
     {
-        if (!is_file($keysFilePath) && strpos("http", $keysFilePath)) {
+        if (!is_file($keysFilePath) && strpos('http', $keysFilePath)) {
             return [];
         }
 
