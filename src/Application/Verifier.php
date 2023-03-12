@@ -19,14 +19,19 @@ use CognitoTokenVerifier\Domain\Exceptions\InvalidTokenExpiredException;
 final class Verifier
 {
     private Token $token;
+    private string $cognitoUserPoolRegion;
 
-    public function __construct(private KeysRepository $keysRepository)
-    {
+    public function __construct(
+        private string $cognitoUserPoolId,
+        private KeysRepository $keysRepository,
+        private ?string $cognitoAppClientsIdsAllowed = null,
+    ) {
+        $this->setCognitoUserPoolRegionFromCognitoUserPoolId();
     }
 
     /**
      * @param  string                       $bearerToken
-     * @param  array<int,string>            $scopesRoutes
+     * @param  array<int,string>|null       $requiredResourceServerScopes
      * @throws InvalidArgumentException
      * @throws InvalidTokenException
      * @throws InvalidSignature
@@ -36,30 +41,28 @@ final class Verifier
      * @throws InvalidUseException
      * @throws InvalidScopesException
      */
-    public function __invoke(string $bearerToken, ?array $scopesRoutes): void
+    public function __invoke(string $bearerToken, ?array $requiredResourceServerScopes = null): void
     {
         $this->token = BearerTokenParser::decode($bearerToken);
 
         $this->ensureTokenHaveRequiredParameters();
+        $this->ensureTokenKeyIdExistsOnJWK();
+        $this->ensureTokenIssuerMatchWithUserPool();
+        $this->ensureTokenIsNotExpired();
+        $this->ensureTokenUseIsAccess();
 
-        if ($_ENV['APP_ENV'] === 'prod') {
-            $this->ensureSignature();
-            $this->ensureClientId();
-            $this->ensureIssuer();
+        if (isset($this->cognitoAppClientsIdsAllowed) && !empty($this->cognitoAppClientsIdsAllowed)) {
+            $this->ensureTokenAppClientIdItsAllowed();
         }
 
-        $this->ensureTokenIsNotExpired();
-        $scopesRoutesFormated = $this->formatScopesRoutes($scopesRoutes);
-        $this->ensureAccess();
-
-        if (count($scopesRoutesFormated) > 0) {
-            $this->ensureScopes($scopesRoutesFormated);
+        if ($requiredResourceServerScopes) {
+            $this->ensureRequiredScopesExistsOnToken($requiredResourceServerScopes);
         }
     }
 
-    private function ensureSignature(): void
+    private function ensureTokenKeyIdExistsOnJWK(): void
     {
-        $jwk = $this->keysRepository->findKeyWithKid($this->token->kid());
+        $jwk = $this->keysRepository->findKeyByKid($this->token->kid());
 
         if (null === $jwk) {
             throw new InvalidSignature();
@@ -80,51 +83,41 @@ final class Verifier
         }
     }
 
-    /**
-     * @param  ?array<int,string> $scopesRoutes
-     * @return array<int,string>
-     */
-    private function formatScopesRoutes(?array $scopesRoutes): array
+    private function ensureTokenAppClientIdItsAllowed(): void
     {
-        if (!isset($scopesRoutes) || count($scopesRoutes) == 0) {
-            return [];
-        }
-
-        return array_map(function ($scope) {
-            return $_ENV['AWS_SCOPE_URL'] . '/' . $scope;
-        }, $scopesRoutes);
-    }
-
-    private function ensureClientId(): void
-    {
-        $clients = explode(',', $_ENV['AWS_CLIENTS_ID_ALLOWNED']);
+        $clients = explode(',', $this->cognitoAppClientsIdsAllowed);
 
         if (!in_array($this->token->clientId(), $clients)) {
             throw new InvalidClientException();
         }
     }
 
-    private function ensureIssuer(): void
+    private function ensureTokenIssuerMatchWithUserPool(): void
     {
-        if ($this->token->iss() != 'https://cognito-idp.' . $_ENV['AWS_COGNITO_REGION'] . '.amazonaws.com/' . $_ENV['AWS_COGNITO_USER_POOL_ID']) {
+        if ($this->token->iss() !== 'https://cognito-idp.' . $this->cognitoUserPoolRegion . '.amazonaws.com/' . $this->cognitoUserPoolId) {
             throw new InvalidUserPoolException();
         }
     }
 
-    private function ensureAccess(): void
+    private function ensureTokenUseIsAccess(): void
     {
-        if ($this->token->tokenUse() != 'access') {
+        if ($this->token->tokenUse() !== 'access') {
             throw new InvalidUseException();
         }
     }
 
     /**
-     * @param array<int,string> $scopeRoutes
+     * @param array<string> $scopeRoutes
      */
-    private function ensureScopes(array $scopeRoutes): void
+    private function ensureRequiredScopesExistsOnToken(array $scopeRoutes): void
     {
-        if (count(array_intersect($this->token->scope(), $scopeRoutes)) != count($scopeRoutes)) {
+        if (count(array_intersect($this->token->scope(), $scopeRoutes)) !== count($scopeRoutes)) {
             throw new InvalidScopesException();
         }
+    }
+
+    private function setCognitoUserPoolRegionFromCognitoUserPoolId(): void
+    {
+        $this->cognitoUserPoolRegion = explode('_', $this->cognitoUserPoolId)[0];
     }
 }
